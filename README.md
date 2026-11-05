@@ -32,17 +32,17 @@ A live subtitle translator for Tizen-based Samsung TVs. It reads the subtitles i
 
 ```mermaid
 flowchart LR
-    HDMI[PS5 / HDMI] --> TV[Tizen TV]
-    TV -->|ppicapture 720x540/576| Runner[SubtitleRunner<br/>(root)]
-    Runner -->|crop| OCR{Tesseract 5.5<br/>or MNN CRNN}
-    OCR -->|EN text| MT{DeepL / NLLB-600M / Argos}
-    MT -->|TR| Scene[live-scene.json]
-    Scene --> Overlay[EFL OverlayProbe]
+    HDMI["PS5 / HDMI"] --> TV["Tizen TV"]
+    TV -->|"ppicapture 720x540/576"| Runner["SubtitleRunner<br/>(root)"]
+    Runner -->|"crop"| OCR{"Tesseract 5.5<br/>or MNN CRNN"}
+    OCR -->|"EN text"| MT{"DeepL / NLLB-600M / Argos"}
+    MT -->|"TR"| Scene["live-scene.json"]
+    Scene --> Overlay["EFL OverlayProbe"]
     Overlay --> TV
-    App[SubtitleTV WGT] -->|HTTP 127.0.0.1:18765| Helper[SubtitleHelper<br/>(root)]
-    Helper -->|start / stop / config| Runner
-    App -.->|starts helper via Vetro /exec| Vetro[Vetro root agent]
-    MT -.->|LAN HTTP| Server[Local translation server<br/>Mac/PC]
+    App["SubtitleTV WGT"] -->|"HTTP 127.0.0.1:18765"| Helper["SubtitleHelper<br/>(root)"]
+    Helper -->|"start / stop / config"| Runner
+    App -.->|"starts helper via Vetro /exec"| Vetro["Vetro root agent"]
+    MT -.->|"LAN HTTP"| Server["Local translation server<br/>Mac/PC"]
 ```
 
 ### Components

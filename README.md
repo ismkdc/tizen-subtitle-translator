@@ -2,12 +2,6 @@
 
 A live subtitle translator for Tizen-based Samsung TVs. It reads the subtitles in the HDMI/PS5 picture, translates them to Turkish, and draws them over the game. No phone app is needed: a Tizen WGT UI plus a root helper, a screen-capture/OCR/translation runner, and an EFL overlay.
 
-<p align="center">
-  <img src="docs/images/overlay.png" alt="SubtitleTV overlay: Turkish subtitle band over a game" width="720">
-  <br>
-  <em>Test overlay: Turkish subtitle band at the top of the game.</em>
-</p>
-
 > **Status:** experimental / personal use. Requires root. Not affiliated with Samsung or any game publisher.
 
 > **Naming:** the TV app is called **SubtitleTV**; the repository is `tizen-subtitle-translator`. The subtitle output language is Turkish.

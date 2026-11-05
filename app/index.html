@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' data:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src http://127.0.0.1:18765 http://127.0.0.1:8099;">
+<title>SubtitleTV</title>
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<div id="app">
+  <header>
+    <div class="brand">
+      <div class="mark"><span>CC</span></div>
+      <div class="brand-text">
+        <h1>SubtitleTV</h1>
+        <p>Reads the English on screen, translates it to Turkish, and draws it over the game.</p>
+      </div>
+    </div>
+    <div class="chips">
+      <div class="chip" id="chip-service"><i></i><span>Service</span></div>
+      <div class="chip" id="chip-engine"><i></i><span>Engine</span></div>
+      <div class="chip" id="chip-key"><i></i><span>DeepL</span></div>
+    </div>
+  </header>
+
+  <main>
+    <section id="view-hub" class="view active">
+      <div class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow">NO PHONE · ON THE TV</div>
+          <h2 id="hub-title">Subtitle engine stopped</h2>
+          <p id="hub-sub">Press Start. It reads the TV screen, translates the English subtitles to Turkish, and draws the subtitle band over the game.</p>
+          <button id="btn-toggle" class="primary focusable">Start</button>
+          <div class="hint" id="hub-hint">Remote: OK start/stop · Back exit</div>
+        </div>
+        <div class="preview hero-preview focusable" data-view="style">
+          <div class="frame">
+            <div class="game"></div>
+            <div class="subtitle-band" id="hub-band">Sample Turkish subtitle line</div>
+          </div>
+          <div class="preview-label">Subtitle preview</div>
+        </div>
+      </div>
+      <div class="cards">
+        <button class="card focusable" data-view="style"><h3>Subtitle style</h3><p>Size, position, background</p></button>
+        <button class="card focusable" data-view="region"><h3>Source region</h3><p>Area to read on screen</p></button>
+        <button class="card focusable" data-view="translate"><h3>Translation</h3><p>EN → TR · DeepL</p></button>
+        <button class="card focusable" data-view="diag"><h3>Diagnostics</h3><p>Last read and timings</p></button>
+      </div>
+    </section>
+
+    <section id="view-style" class="view">
+      <div class="view-head"><h2>Subtitle style</h2><p>Changes apply instantly while the engine is running.</p></div>
+      <div class="split">
+        <div class="settings">
+          <div class="setting"><label>Font size</label><div class="stepper"><button class="step focusable" data-key="size" data-dir="-1">−</button><span id="val-size">34</span><button class="step focusable" data-key="size" data-dir="1">+</button></div></div>
+          <div class="setting"><label>Vertical position</label><div class="stepper"><button class="step focusable" data-key="bottom" data-dir="-1">−</button><span id="val-bottom">1000</span><button class="step focusable" data-key="bottom" data-dir="1">+</button></div></div>
+          <div class="presets">
+            <button class="ghost focusable" data-bottom="90">Top</button>
+            <button class="ghost focusable" data-bottom="560">Middle</button>
+            <button class="ghost focusable" data-bottom="1000">Bottom</button>
+          </div>
+          <div class="setting"><label>Background</label><div class="stepper"><button class="step focusable" data-key="opacity" data-dir="-1">−</button><span id="val-opacity">100%</span><button class="step focusable" data-key="opacity" data-dir="1">+</button></div></div>
+          <div class="setting"><label>Text colour</label><div class="segmented"><button class="seg focusable" data-color="#FFFFFFFF">White</button><button class="seg focusable" data-color="#FFE86AFF">Yellow</button></div></div>
+          <button class="ghost focusable" data-action="reset-style">Reset to defaults</button>
+        </div>
+        <div class="preview big">
+          <div class="frame"><div class="game"></div><div class="subtitle-band" id="style-band">Sample Turkish subtitle line</div></div>
+        </div>
+      </div>
+      <div class="actions"><button class="back focusable" data-action="back">Back</button></div>
+    </section>
+
+    <section id="view-region" class="view">
+      <div class="view-head"><h2>Source region</h2><p>Set the area subtitles occupy on screen, as percentages.</p></div>
+      <div class="split">
+        <div class="settings">
+          <div class="setting"><label>Horizontal position</label><div class="stepper"><button class="step focusable" data-key="rx" data-dir="-1">−</button><span id="val-rx">21%</span><button class="step focusable" data-key="rx" data-dir="1">+</button></div></div>
+          <div class="setting"><label>Vertical position</label><div class="stepper"><button class="step focusable" data-key="ry" data-dir="-1">−</button><span id="val-ry">86%</span><button class="step focusable" data-key="ry" data-dir="1">+</button></div></div>
+          <div class="setting"><label>Width</label><div class="stepper"><button class="step focusable" data-key="rw" data-dir="-1">−</button><span id="val-rw">58%</span><button class="step focusable" data-key="rw" data-dir="1">+</button></div></div>
+          <div class="setting"><label>Height</label><div class="stepper"><button class="step focusable" data-key="rh" data-dir="-1">−</button><span id="val-rh">11%</span><button class="step focusable" data-key="rh" data-dir="1">+</button></div></div>
+          <div class="presets">
+            <button class="ghost focusable" data-preset="bottom">Bottom band</button>
+            <button class="ghost focusable" data-preset="middle">Middle</button>
+            <button class="ghost focusable" data-preset="full">Full screen</button>
+          </div>
+        </div>
+        <div class="region-preview">
+          <div class="region-frame">
+            <div class="region-rect" id="region-rect"></div>
+            <span class="region-tag">AREA TO READ</span>
+          </div>
+        </div>
+      </div>
+      <div class="actions"><button class="back focusable" data-action="back">Back</button></div>
+    </section>
+
+    <section id="view-translate" class="view">
+      <div class="view-head"><h2>Translation</h2><p>The engine runs on the TV; no phone or pairing is needed.</p></div>
+      <div class="kv-list">
+        <div class="kv"><span>Source language</span><b>English</b></div>
+        <div class="kv"><span>Target language</span><b>Turkish</b></div>
+        <div class="kv"><span>Service</span><b>DeepL</b></div>
+        <div class="kv"><span>Key</span><b id="key-state">—</b></div>
+        <div class="kv"><span>OCR</span><b>On-device neural model</b></div>
+      </div>
+      <p class="note">The DeepL key lives on the TV at <code>/opt/usr/subtitle-ocr/deepl-key</code>. Update that file to change the key.</p>
+      <div class="actions"><button class="back focusable" data-action="back">Back</button></div>
+    </section>
+
+    <section id="view-diag" class="view">
+      <div class="view-head"><h2>Diagnostics</h2><p>Live status of the last OCR and translation step.</p></div>
+      <div class="diag-grid">
+        <div class="diag"><span>Engine</span><b id="diag-run">—</b></div>
+        <div class="diag"><span>Capture</span><b id="diag-cap">—</b></div>
+        <div class="diag wide"><span>Last OCR</span><b id="diag-ocr">—</b></div>
+        <div class="diag wide"><span>Last translation</span><b id="diag-tr">—</b></div>
+        <div class="diag"><span>OCR time</span><b id="diag-ocrms">—</b></div>
+        <div class="diag"><span>Translation time</span><b id="diag-trms">—</b></div>
+      </div>
+      <div class="actions"><button class="back focusable" data-action="back">Back</button></div>
+    </section>
+  </main>
+
+  <footer>
+    <span><b>OK</b> select</span>
+    <span><b>Back</b> exit</span>
+    <span class="foot-right" id="foot-state">Ready</span>
+  </footer>
+</div>
+<script src="js/app.js"></script>
+</body>
+</html>

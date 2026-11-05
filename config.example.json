@@ -1,0 +1,25 @@
+{
+  "region": {
+    "x": 0.18,
+    "y": 0.72,
+    "w": 0.64,
+    "h": 0.26
+  },
+  "ocr": {
+    "threshold": 155,
+    "minConfidence": 55,
+    "neuralMinConfidence": 70,
+    "fallback": true
+  },
+  "style": {
+    "size": 28,
+    "bottom": 220,
+    "opacity": 0.92,
+    "color": "#FFFFFF"
+  },
+  "translate": {
+    "source": "EN",
+    "target": "TR",
+    "endpoint": ""
+  }
+}

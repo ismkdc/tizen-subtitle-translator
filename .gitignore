@@ -1,0 +1,44 @@
+# Build output
+bin/
+obj/
+dist/
+*.wgt
+*.dll
+*.pdb
+*.exe
+*.deps.json
+
+# Models and large binaries (download / build separately — see docs/OCR.md)
+*.mnn
+*.onnx
+*.traineddata
+*.bin
+tessdata/
+models/
+
+# Python environments
+translate-env/
+.venv/
+__pycache__/
+*.pyc
+
+# Runtime artifacts
+frame.y
+frame.c
+frame.meta
+input.pgm
+neural.pgm
+live-scene.json
+status.json
+runner.pid
+*.log
+
+# Secrets and local data
+private/
+deepl-key
+*.key
+*.pem
+.env
+
+# OS
+.DS_Store
